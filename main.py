@@ -7,6 +7,7 @@ from qiskit_aer.noise import NoiseModel, depolarizing_error
 from qiskit_aer.primitives import Estimator as AerEstimator
 #from qiskit.providers.fake_provider import FakeManilaV2
 from qiskit_ibm_runtime.fake_provider import FakeManilaV2
+from qiskit.providers.fake_provider import GenericBackendV2
 
 def run_vqe_n2():
     H2 = H2_function()
@@ -87,8 +88,9 @@ def run_vqe_n3():
 #     return est_r
 
 def function_est_r():
-    chip_ibm = FakeManilaV2()
-    est_r = AerEstimator.from_backend(chip_ibm, transpile_options={"optimization_level": 0}, approximation=True)
+    chip_ibm = GenericBackendV2(num_qubits=5)
+    model_r = NoiseModel.from_backend(chip_ibm)
+    est_r = AerEstimator( backend_options={"noise_model": model_r}, transpile_options={"optimization_level": 0}, approximation=True)
     return est_r
 def run_zne_n3(eta_opt, theta_opt):
     H3 = H3_function()
