@@ -88,7 +88,12 @@ def run_vqe_n3():
 
 def function_est_r():
     chip_ibm = FakeManilaV2()
-    est_r = AerEstimator.from_backend(chip_ibm, transpile_options={"optimization_level": 0}, approximation=True)
+    #est_r = AerEstimator(chip_ibm, options={"transpile_options": {"optimization_level": 0}, "approximation": True})
+    est_r = AerEstimator(
+    backend_options={"noise_model": NoiseModel.from_backend(chip_ibm)},
+    transpile_options={"optimization_level": 0},
+    approximation=True
+)
     return est_r
 def run_zne_n3(eta_opt, theta_opt):
     H3 = H3_function()

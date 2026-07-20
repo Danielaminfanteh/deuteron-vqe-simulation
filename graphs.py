@@ -3,7 +3,7 @@ import numpy as np
 from qiskit.quantum_info import SparsePauliOp
 
 def plot_vqe(energies, angle, title=""):
-    print("Entré a la función")
+    #print("Entré a la función")
     fig, axs = plt.subplots(2,1)
     #iteration vs energy
     axs[0].plot(energies, marker = 'o')
@@ -19,7 +19,7 @@ def plot_vqe(energies, angle, title=""):
     axs[1].set_ylabel('Angle (radians)')
     #axs[1].legend()
     axs[1].grid()
-    plt.savefig('mi_grafica_prueba.png')
+    #plt.savefig('mi_grafica_prueba.png')
     plt.show()
 
 def plot_energy(est, qca, H2):
